@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Menu>
+
+@{
+    ViewData["Title"] = "Меню";
+}
+
+<h1>Меню</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-info">Створити</a>
+</p>
+<table class="table sorting" id="menus">
+    <thead>
+        <tr class="tableHeader">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>Дії</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="id_@item.Id" class="@item.Id">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary">Детально</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark">Редагувати</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Видалити</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{ 
+    <script>
+        $("table#menus tbody").sortable({
+            items: "tr:not(.tableHeader)",
+            placeholder: "ui-state-hightlight",
+            update: function () {
+                let ids = $("table#menus tbody").sortable("serialize");
+                let url = "/admin/menus/reorder";
+                $.post(url, ids, function () { });
+            }
+        })
+    </script>
+}

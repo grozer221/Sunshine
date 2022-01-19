@@ -1,0 +1,31 @@
+﻿@model Sunshine.Models.SubMenu
+
+@{
+    ViewData["Title"] = "Видалити під меню";
+}
+
+<h1>Видалити під меню</h1>
+
+<h3>Ви впевнені що бажаєте видалити?</h3>
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <a asp-action="Index" class="btn btn-outline-primary">Повернутися назад</a>
+        <button type="submit" class="btn btn-danger">Видалити</button>
+    </form>
+</div>

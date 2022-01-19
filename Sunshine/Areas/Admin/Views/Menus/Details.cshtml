@@ -1,0 +1,43 @@
+﻿@model Sunshine.Areas.Admin.ViewModels.Menus.MenusDetailsViewModel
+
+@{
+    ViewData["Title"] = "Детально меню";
+
+}
+
+<h1>Детально  меню</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Menu.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Menu.Name)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Menu.SubMenus)
+        </dt>
+        <dd class="col-sm-10">
+            <ul>
+                @{
+                    foreach (var subMenu in Model.SubMenus)
+                    {
+                        <li>
+                            <span>@subMenu.Name</span>
+                            <a asp-controller="SubMenus" asp-action="Details" asp-route-id="@subMenu.Id">Переглянути</a>
+                            <a asp-controller="SubMenus" asp-action="Edit" asp-route-id="@subMenu.Id">Редарувати</a>
+                            <a asp-controller="SubMenus" asp-action="Delete" asp-route-id="@subMenu.Id">Видалити</a>
+                        </li>
+                    }
+                }
+            </ul>
+
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-outline-primary">Повернутися назад</a>
+    <a asp-action="Edit" asp-route-id="@Model.Menu.Id" class="btn btn-dark">Редагувати</a>
+</div>
