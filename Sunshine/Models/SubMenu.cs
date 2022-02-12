@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sunshine.Models
 {
-    public class SubMenu
+    public class SubMenu : BaseModel
     {
-        public int Id { get; set; }
         [Display(Name="Назва")]
         public string Name { get; set; }
         [Display(Name = "Текст")]
@@ -15,6 +15,5 @@ namespace Sunshine.Models
         public int MenuId { get; set; }
         [Display(Name = "Меню")]
         public virtual Menu Menu { get; set; }
-
     }
 }

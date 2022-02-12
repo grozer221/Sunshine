@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Sunshine.Areas.Admin.Reporitories;
 using Sunshine.Areas.Admin.ViewModels.Menus;
-using Sunshine.Database.Reporitories;
+using Sunshine.Attributes;
+using Sunshine.Enums;
 using Sunshine.Models;
 
 namespace Sunshine.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "admin")]
     public class MenusController : Controller
     {
         private readonly MenusRepository _menusRep;

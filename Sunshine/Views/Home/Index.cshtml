@@ -1,6 +1,12 @@
-﻿@{
-    ViewData["Title"] = "Home";
+﻿@model HomeIndexViewModel
+
+@{
+    ViewData["Title"] = "Новини";
 }
 
-<h1>Home</h1>
+<h1>Новини</h1>
+@foreach (var neww in Model.News)
+{
+    <div>@neww.Title</div>
+}
 

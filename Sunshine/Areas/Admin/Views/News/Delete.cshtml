@@ -1,0 +1,45 @@
+﻿@model Sunshine.Models.New
+
+@{
+    ViewData["Title"] = "Видалити новину (Адмін)";
+}
+
+<h1>Видалити новину</h1>
+
+<h3>Ви впевнені що бажаєте видалити?</h3>
+<div>
+    <h4>New</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Title
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ShortText)
+        </dt>
+        <dd class="col-sm-12">
+            @Html.Raw(Model.ShortText)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+        <dd class="col-sm-12">
+            @Html.Raw(Model.Text)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="~/media/news/@Model.Image" width="200" />
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <a asp-action="Index" class="btn btn-outline-primary">Повернутися назад</a>
+        <button type="submit" class="btn btn-danger">Видалити</button>
+    </form>
+</div>

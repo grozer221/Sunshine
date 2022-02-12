@@ -1,11 +1,13 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Sunshine.Database;
-using Sunshine.Database.Reporitories;
+using Sunshine.Areas.Admin.Reporitories;
+using Sunshine.Reporitories;
+using Sunshine.Services;
 
 namespace Sunshine
 {
@@ -21,10 +23,25 @@ namespace Sunshine
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDatabaseContext>(options => options.UseMySQL("server=localhost;user=root;password=;database=sunshine;"));
+
             services.AddScoped<UsersRepository>();
             services.AddScoped<MenusRepository>();
             services.AddScoped<SubMenusRepository>();
+            services.AddScoped<NewsRepository>();
+
+            services.AddScoped<AuthRepository>();
+
+            services.AddSingleton<MailService>();
+            services.AddSingleton<AuthService>();
+
             services.AddControllersWithViews();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Auth/Login");
+                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Auth/AccessDenied");
+                });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -43,22 +60,20 @@ namespace Sunshine
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();    // аутентификация
+            app.UseAuthorization();     // авторизация  
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllerRoute(
-                //   name: "areas",
-                //   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
-                endpoints.MapAreaControllerRoute(
-                    name: "admin",
-                    areaName: "admin",
-                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                 name: "areas",
+                 pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                 );
 
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                 name: "default",
+                 pattern: "{controller=Home}/{action=Index}/{id?}"
+                 );
             });
         }
     }

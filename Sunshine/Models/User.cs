@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Sunshine.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sunshine.Models
 {
-    public class User
+    public class User : BaseModel
     {
-        public int Id { get; set; }
         public string Email { get; set; }
         [Display(Name = "Ім'я")]
         public string FirstName { get; set; }
@@ -13,5 +13,6 @@ namespace Sunshine.Models
         public string Password { get; set; }
         [Display(Name = "Підтверджений email")]
         public bool IsConfirmedEmail { get; set; }
+        public string Role { get; set; }
     }
 }

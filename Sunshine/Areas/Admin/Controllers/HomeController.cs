@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Sunshine.Database;
+using Sunshine.Attributes;
+using Sunshine.Enums;
 
 namespace Sunshine.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles= "admin")]
     public class HomeController : Controller
     {
         public HomeController()
@@ -12,7 +14,7 @@ namespace Sunshine.Areas.Admin.Controllers
         }
 
         // GET: Home/Index
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
         }

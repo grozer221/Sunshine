@@ -1,15 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Sunshine.Areas.Admin.ViewModels.Menus;
+using Sunshine.Areas.Admin.Reporitories;
 using Sunshine.Areas.Admin.ViewModels.SubMenus;
-using Sunshine.Database.Reporitories;
+using Sunshine.Attributes;
+using Sunshine.Enums;
 using Sunshine.Models;
 
 namespace Sunshine.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "admin")]
     public class SubMenusController : Controller
     {
         private readonly MenusRepository _menusRep;
@@ -24,15 +26,15 @@ namespace Sunshine.Areas.Admin.Controllers
         // GET: Admin/Menus
         public async Task<IActionResult> Index()
         {
-            var menus = await _subMenusRep.GetIncludedMenu();
+            IEnumerable<SubMenu> menus = await _subMenusRep.GetIncludedMenu();
             return View(menus);
         }
 
         // GET: Admin/Menus/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            SubMenu subMenus = await _subMenusRep.GetById(id);
-            return View(subMenus);
+            SubMenu subMenu = await _subMenusRep.GetById(id);
+            return View(subMenu);
         }
 
         // GET: Admin/Menus/Create

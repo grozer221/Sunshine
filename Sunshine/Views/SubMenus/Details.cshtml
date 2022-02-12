@@ -1,0 +1,8 @@
+﻿@model Sunshine.Models.SubMenu
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h1>@Model.Name</h1>
+<div>@Html.Raw(Model.Text)</div>

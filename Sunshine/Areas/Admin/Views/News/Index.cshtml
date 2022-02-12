@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Sunshine.Models.New>
+
+@{
+    ViewData["Title"] = "Новини (Адмін)";
+}
+
+<h1>Новини</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-info">Створити</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>Дії</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Title
+                </td>
+                <td>
+                    <img src="~/media/news/@item.Image" width="100" />
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary">Детально</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark">Редагувати</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Видалити</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="d-flex w-100 justify-content-center">
+    <Pagination page-count="@ViewBag.TotalPages"
+                page-target="/Admin/Products"
+                page-number="@ViewBag.Page"
+                page-range="@ViewBag.PageRange">
+    </Pagination>
+</div>
