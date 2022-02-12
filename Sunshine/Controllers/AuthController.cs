@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using Sunshine.Enums;
 using Sunshine.Models;
 using Sunshine.Reporitories;
 using Sunshine.Services;
@@ -48,7 +47,7 @@ namespace Sunshine.Controllers
                     if (user.IsConfirmedEmail)
                     {
                         await _authService.Authenticate(HttpContext, user.Email, user.Role);
-                        return RedirectToAction(nameof(Index), "Home");
+                        return RedirectToAction(nameof(Index), "News");
                     }
                     string token = _authService.GetConfirmatioEmailToken(user.Email, user.Role);
                     string url = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.Value}/auth/confirmationEmail/{token}";
@@ -81,7 +80,7 @@ namespace Sunshine.Controllers
                     User newUser = await _authRepository.Resigter(authRegisterViewModel);
                     await _mailService.SendEmailConfirmationEmail(newUser.Email, "link!!");
                     TempData["Success"] = "Ви успішно зареєструвалися. Лист з підтвердженням було надіслано на ваш email";
-                    return RedirectToAction(nameof(Index), "Home");
+                    return RedirectToAction(nameof(Index), "News");
                 }
                 else
                 {
@@ -95,14 +94,14 @@ namespace Sunshine.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "News");
         }
 
 
         // GET: Auth/ConfirmationEmail/token
         public IActionResult ConfirmationEmail(string token)
         {
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "News");
         }
     }   
 }

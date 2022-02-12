@@ -1,0 +1,16 @@
+﻿@model Sunshine.Models.New
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<h1>@Model.Title</h1>
+<div class="newDetails">
+    <img src="~/media/news/@Model.Image" width="200" class="newsImage" />
+    <div>@Html.Raw(Model.Text)</div>
+    <div class="text-right">
+        <div>
+            <span class="textGrey textSmall">Розміщено @Model.CreatedAt</span>
+        </div>
+    </div>
+</div>

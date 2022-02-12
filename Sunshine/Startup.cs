@@ -67,12 +67,12 @@ namespace Sunshine
             {
                 endpoints.MapControllerRoute(
                  name: "areas",
-                 pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                 pattern: "{area:exists}/{controller=News}/{action=Index}/{id?}"
                  );
 
                 endpoints.MapControllerRoute(
                  name: "default",
-                 pattern: "{controller=Home}/{action=Index}/{id?}"
+                 pattern: "{controller=News}/{action=Index}/{id?}"
                  );
             });
         }

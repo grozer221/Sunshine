@@ -10,164 +10,101 @@
     <title>@ViewData["Title"] - Сонечко</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&family=Hind+Siliguri&display=swap" rel="stylesheet">
 </head>
 <body>
-    @*<header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <div class="container">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Сонечко</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Головна</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="admin" asp-controller="Home" asp-action="Index">Адмін панель</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">Увійти</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Register">Реєстрація</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
-        <div class="container">
-            <main role="main" class="pb-3">
-                <partial name="_NotificationPartial">
-                    @RenderBody()
-            </main>
-        </div>
-
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2022 - Сонечко
-            </div>
-        </footer>*@
-
     <div class="wrapperContainer">
         <div class="container">
             <header class="header">
-                @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Сонечко</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Головна</a>
-                                </li>
-                                @{
-                                    foreach (var menu in menus)
-                                    {
-                                        <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@menu.Name</a>
-                                        </li>
-                                    }
-                                    if (ViewContext.HttpContext.User.IsInRole(Sunshine.Enums.Role.admin.ToString()))
-                                    {
-                                        <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="admin" asp-controller="Home" asp-action="Index">Адмін панель</a>
-                                        </li>
+                <div class="headerTitle">
+                    <h1>
+                        <span>СОНЕЧКО</span>
+                    </h1>
+                    <div class="blobs_1"></div>
+                    <div class="blobs_2"></div>
+                    <div class="blobs_3"></div>
+                    <div class="blobs_4"></div>
+                    <div class="blobs_5"></div>
+                    <div class="blobs_6"></div>
+                    <div class="blobs_7"></div>
+                    <!-- This is not part of Pen -->
+                    <a class="me" href="https://codepen.io/uzcho_/pens/popular/?grid_type=list" target="_blank" style="color:#000"></a>
+                </div>
+                <div class="menus">
+                    <nav class="menu">
+                        <ol>
+                            <li class="menu-item">
+                                <a asp-area="" asp-controller="News" asp-action="Index">Новини</a>
+                            </li>
+                            @{
+                                foreach (var menu in menus)
+                                {
+                                    <li class="menu-item">
+                                        <a href="#">@menu.Name</a>
+                                        <ol class="sub-menu">
 
-                                    }
-                                }
-                            </ul>
-                            <ul class="navbar-nav">
-                                @{
-                                    if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
-                                    {
-                                        <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Вийти(@ViewContext.HttpContext.User.Identity.Name)</a>
-                                        </li>
-                                    }
-                                    else
-                                    {
-                                        <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">Увійти</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Register">Реєстрація</a>
-                                        </li>
-                                    }
-                                }
-
-                            </ul>
-                        </div>
-                    </nav>*@
-                <nav class="menu">
-                    <ol>
-                        <li class="menu-item">
-                            <a asp-area="" asp-controller="Home" asp-action="Index">Новини</a>
-                        </li>
-                        @{
-                            foreach (var menu in menus)
-                            {
-                                <li class="menu-item">
-                                    <a href="/">@menu.Name</a>
-                                    <ol class="sub-menu">
-
-                                        @{
-                                            foreach (var subMenu in menu.SubMenus)
-                                            {
-                                                <li class="menu-item">
-                                                    <a asp-area="" asp-controller="Submenus" asp-action="Details" asp-route-id="@subMenu.Id">@subMenu.Name</a>
-                                                </li>
+                                            @{
+                                                foreach (var subMenu in menu.SubMenus)
+                                                {
+                                                    <li class="menu-item">
+                                                        <a asp-area="" asp-controller="Submenus" asp-action="Details" asp-route-id="@subMenu.Id">@subMenu.Name</a>
+                                                    </li>
+                                                }
                                             }
-                                        }
-                                    </ol>
-                                </li>
-                            }
-                            if (ViewContext.HttpContext.User.IsInRole(Sunshine.Enums.Role.admin.ToString()))
-                            {
-                                <li class="menu-item">
-                                    <a asp-area="admin" asp-controller="Home" asp-action="Index">Адмін панель</a>
-                                </li>
+                                        </ol>
+                                    </li>
+                                }
+                                if (ViewContext.HttpContext.User.IsInRole(Sunshine.Enums.Role.admin.ToString()))
+                                {
+                                    <li class="menu-item">
+                                        <a asp-area="admin" asp-controller="News" asp-action="Index">Адмін панель</a>
+                                    </li>
 
+                                }
                             }
-                        }
-                    </ol>
-                </nav>
-                <nav class="menu">
-                    <ol>
-                        @{
-                            if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
-                            {
-                                <li class="menu-item">
-                                    <a asp-area="" asp-controller="Auth" asp-action="Logout">Вийти</a>
-                                </li>
+                        </ol>
+                    </nav>
+                    <nav class="menu">
+                        <ol>
+                            @{
+                                if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
+                                {
+                                    <li class="menu-item">
+                                        <a asp-area="" asp-controller="Auth" asp-action="Logout">Вийти</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="menu-item">
+                                        <a asp-area="" asp-controller="Auth" asp-action="Login">Увійти</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a asp-area="" asp-controller="Auth" asp-action="Register">Реєстрація</a>
+                                    </li>
+                                }
                             }
-                            else
-                            {
-                                <li class="menu-item">
-                                    <a asp-area="" asp-controller="Auth" asp-action="Login">Увійти</a>
-                                </li>
-                                <li class="menu-item">
-                                    <a asp-area="" asp-controller="Auth" asp-action="Register">Реєстрація</a>
-                                </li>
-                            }
-                        }
-                    </ol>
-                </nav>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="rocket"></div>
             </header>
+        </div>
+        <div class="container">
             <main class="main pb-3">
                 <partial name="_NotificationPartial">
                     @RenderBody()
+                    <div id="mid_bird"></div>
+                    <div id="mid_baloon"></div>
             </main>
         </div>
+        <footer class="footer">
+            <div class="footerImage">
+                <div class="footerText">Офіційний сайт - Дитячий Садочок "Сонечко"</div>
+            </div>
+        </footer>
     </div>
-
 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

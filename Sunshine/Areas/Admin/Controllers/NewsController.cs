@@ -57,7 +57,7 @@ namespace Sunshine.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                string imageName = "noimage.png";
+                string imageName = "noimage.jpg";
                 if (neww.ImageUpload != null)
                 {
                     string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/news");
@@ -102,7 +102,7 @@ namespace Sunshine.Areas.Admin.Controllers
                 if (neww.ImageUpload != null)
                 {
                     string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/news");
-                    if (neww.Image != null && !string.Equals(neww.Image, "noimage.png"))
+                    if (neww.Image != null && !string.Equals(neww.Image, "noimage.jpg"))
                     {
                         string oldImagePath = Path.Combine(uploadsDir, neww.Image);
                         if (System.IO.File.Exists(oldImagePath))
@@ -143,7 +143,7 @@ namespace Sunshine.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var neww = await _newsRep.GetById(id);
-            if (neww.Image != null && !string.Equals(neww.Image, "noimage.png"))
+            if (neww.Image != null && !string.Equals(neww.Image, "noimage.jpg"))
             {
                 string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/news");
                 string oldImagePath = Path.Combine(uploadsDir, neww.Image);

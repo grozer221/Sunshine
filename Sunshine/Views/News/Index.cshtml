@@ -1,0 +1,27 @@
+﻿@model IEnumerable<New>
+
+@{
+    ViewData["Title"] = "Новини";
+}
+
+<div class="news">
+    @foreach (var neww in Model)
+    {
+        <div class="new">
+            <h3>@neww.Title</h3>
+            <div>
+                <img src="~/media/news/@neww.Image" width="200" class="newsImage" />
+                <div>@Html.Raw(neww.ShortText)</div>
+                <div class="text-right">
+                    <div>
+                        <span class="textGrey textSmall">Розміщено @neww.CreatedAt</span>
+                    </div>
+                    <div>
+                        <a asp-area="" asp-action="Details" asp-route-id="@neww.Id" class="btn btn-outline-primary">Детально</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
