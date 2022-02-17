@@ -15,6 +15,7 @@
         "Username": "grozermailpassreset@gmail.com",
         "SmtpServer": "smtp.gmail.com",
         "From": "grozermailpassreset@gmail.com",
+        "JAWSDB_URL": "mysql://root:@localhost:3306/sunshine",
         "Password": "grozermailpassreset123",
         "Port": "465",
         "ASPNETCORE_ENVIRONMENT": "Development"

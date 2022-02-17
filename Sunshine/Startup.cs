@@ -12,16 +12,16 @@ namespace Sunshine
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDatabaseContext>(options => options.UseMySQL("server=localhost;user=root;password=;database=sunshine;"));
+            services.AddDbContext<AppDatabaseContext>(options => options.UseMySQL(AppDatabaseContext.GetConnectionString()));
 
             services.AddScoped<UsersRepository>();
             services.AddScoped<MenusRepository>();
