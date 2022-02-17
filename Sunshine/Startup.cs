@@ -5,8 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Sunshine.Areas.Admin.Reporitories;
-using Sunshine.Reporitories;
+using Sunshine.Repositories;
 using Sunshine.Services;
 
 namespace Sunshine
@@ -28,6 +27,7 @@ namespace Sunshine
             services.AddScoped<MenusRepository>();
             services.AddScoped<SubMenusRepository>();
             services.AddScoped<NewsRepository>();
+            services.AddScoped<FilesRepository>();
 
             services.AddScoped<AuthRepository>();
 

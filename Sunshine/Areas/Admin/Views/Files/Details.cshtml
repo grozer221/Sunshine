@@ -1,0 +1,51 @@
+﻿@model Sunshine.Areas.Admin.ViewModels.FilesDetailsViewModel;
+
+@{
+    ViewData["Title"] = "Детально про файл (Адмін)";
+}
+
+<h1>Детально про файл</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.File.Upload)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                string[] extensions = { "jpg", "png" };
+                string extension = System.IO.Path.GetExtension(Model.File.Name);
+                if (extensions.Any(x => extension.EndsWith(x)))
+                {
+                    <img src="~/media/files/@Model.File.Name" width="100" />
+                }
+                else
+                {
+                    <img src="~/media/images/file.png" width="100" />
+                }
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.File.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.File.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.File.CreatedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.File.CreatedAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.File.UpdatedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.File.UpdatedAt)
+        </dd>
+    </dl>
+</div>
+<div>
+    <button class="btn btn-dark" onclick="copytext('@($"{Model.WebRootPath}/media/files/{Model.File.Name}")')">Копіювати</button>
+    <a asp-action="Index" class="btn btn-outline-primary">Повернутися назад</a>
+</div>

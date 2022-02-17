@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Sunshine;
-using Sunshine.Areas.Admin.Reporitories;
 using Sunshine.Models;
+using Sunshine.Repositories;
 
 namespace Sunshine.Controllers
 {

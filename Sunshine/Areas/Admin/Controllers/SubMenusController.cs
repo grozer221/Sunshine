@@ -2,11 +2,9 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Sunshine.Areas.Admin.Reporitories;
-using Sunshine.Areas.Admin.ViewModels.SubMenus;
-using Sunshine.Attributes;
-using Sunshine.Enums;
+using Sunshine.Areas.Admin.ViewModels;
 using Sunshine.Models;
+using Sunshine.Repositories;
 
 namespace Sunshine.Areas.Admin.Controllers
 {

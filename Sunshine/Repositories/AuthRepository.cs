@@ -5,7 +5,7 @@ using Sunshine.ViewModels;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Sunshine.Reporitories
+namespace Sunshine.Repositories
 {
     public class AuthRepository
     {

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Sunshine.Models;
-using Sunshine.Reporitories;
+using Sunshine.Repositories;
 using Sunshine.Services;
 using Sunshine.ViewModels;
 using System;
@@ -13,24 +13,30 @@ namespace Sunshine.Controllers
     public class AuthController : Controller
     {
         private readonly AuthRepository _authRepository;
+        private readonly MenusRepository _menusRepository;
         private readonly MailService _mailService;
         private readonly AuthService _authService;
-        public AuthController(AuthRepository authRepository, MailService mailService, AuthService authService)
+        public AuthController(AuthRepository authRepository, MenusRepository menusRepository, MailService mailService, AuthService authService)
         {
             _authRepository = authRepository;
+            _menusRepository = menusRepository;
             _mailService = mailService;
             _authService = authService;
         }
 
         // GET: Auth/AccessDenied
-        public ActionResult AccessDenied()
+        public async Task<ActionResult> AccessDenied()
         {
+            ViewData["Menus"] = await _menusRepository.GetIncludedSubMenus();
+
             return View();
         }
         
         // GET: Auth/Login
-        public ActionResult Login()
+        public async Task<ActionResult> Login()
         {
+            ViewData["Menus"] = await _menusRepository.GetIncludedSubMenus();
+
             return View();
         }
 
@@ -63,8 +69,10 @@ namespace Sunshine.Controllers
         }
 
         // GET: Auth/Register/5
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
+            ViewData["Menus"] = await _menusRepository.GetIncludedSubMenus();
+
             return View();
         }
 

@@ -18,6 +18,7 @@ namespace Sunshine
         public DbSet<Menu> Menus { get; set; }
         public DbSet<SubMenu> SubMenus { get; set; }
         public DbSet<New> News { get; set; }
+        public DbSet<File> Files { get; set; }
 
         public override int SaveChanges()
         {
@@ -44,5 +45,7 @@ namespace Sunshine
                 ((BaseModel)entity.Entity).UpdatedAt = dateTimeNow;
             }
         }
+
+        public DbSet<Sunshine.Models.File> File { get; set; }
     }
 }

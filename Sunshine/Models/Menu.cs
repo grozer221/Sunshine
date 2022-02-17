@@ -7,6 +7,7 @@ namespace Sunshine.Models
     public class Menu : BaseModel
     {
         [Display(Name="Назва")]
+        [Required(ErrorMessage = "Введіть назву")]
         public string Name { get; set; }
         [Display(Name = "Сортування")]
         public int Sorting { get; set; }

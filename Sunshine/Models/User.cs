@@ -1,10 +1,10 @@
-﻿using Sunshine.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Sunshine.Models
 {
     public class User : BaseModel
     {
+        [Required(ErrorMessage = "Введіть текст")]
         public string Email { get; set; }
         [Display(Name = "Ім'я")]
         public string FirstName { get; set; }

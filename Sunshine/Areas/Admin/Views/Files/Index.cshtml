@@ -1,0 +1,65 @@
+﻿@model Sunshine.Areas.Admin.ViewModels.FilesIndexViewModel;
+
+@{
+    ViewData["Title"] = "Файли (Адмін)";
+}
+
+<h1>Файли</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-info">Створити</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => ((List<File>)model.Files)[0].Upload)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => ((List<File>)model.Files)[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => ((List<File>)model.Files)[0].CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => ((List<File>)model.Files)[0].UpdatedAt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Files)
+        {
+            <tr>
+                <td>
+                    @{
+                        string[] extensions = { "jpg", "png" };
+                        string extension = System.IO.Path.GetExtension(item.Name);
+                        if (extensions.Any(x => extension.EndsWith(x)))
+                        {
+                            <img src="~/media/files/@item.Name" width="100" />
+                        }
+                        else
+                        {
+                            <img src="~/media/images/file.png" width="100" />
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedAt)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary">Детально</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Видалити</a>
+                    <button class="btn btn-dark" onclick="copytext('@($"{Model.WebRootPath}/media/files/{item.Name}")')">Копіювати</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

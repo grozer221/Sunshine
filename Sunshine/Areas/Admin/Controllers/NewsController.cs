@@ -4,10 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Sunshine.Areas.Admin.Reporitories;
-using Sunshine.Attributes;
-using Sunshine.Enums;
 using Sunshine.Models;
+using Sunshine.Repositories;
 
 namespace Sunshine.Areas.Admin.Controllers
 {
@@ -69,7 +67,7 @@ namespace Sunshine.Areas.Admin.Controllers
                 }
 
                 neww.Image = imageName;
-                await _newsRep.Update(neww);
+                await _newsRep.Create(neww);
                 return RedirectToAction(nameof(Index));
             }
             return View(neww);

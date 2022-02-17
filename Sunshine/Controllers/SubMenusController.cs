@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Sunshine.Areas.Admin.Reporitories;
 using Sunshine.Models;
+using Sunshine.Repositories;
 
 namespace Sunshine.Controllers
 {

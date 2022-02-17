@@ -15,11 +15,8 @@ namespace Sunshine.Attributes
 
             if (file != null)
             {
-                var extension = Path.GetExtension(file.FileName);
-
-
+                string extension = Path.GetExtension(file.FileName);
                 bool result = extensions.Any(x => extension.EndsWith(x));
-
                 if (!result)
                     return new ValidationResult(GetErrorMessage());
             }
