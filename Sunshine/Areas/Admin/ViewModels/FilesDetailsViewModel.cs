@@ -1,11 +1,14 @@
 ﻿using Sunshine.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Sunshine.Areas.Admin.ViewModels
+namespace Sunshine.ViewModels
 {
-    public class FilesIndexViewModel
+    public class FilesDetailsViewModel
     {
-        public IEnumerable<File> Files { get; set; }
+        public File File { get; set; }
         public string WebRootPath { get; set; }
     }
 }

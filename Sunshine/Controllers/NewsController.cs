@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Sunshine.Models;
 using Sunshine.Repositories;
+using Sunshine.ViewModels;
 
 namespace Sunshine.Controllers
 {
@@ -18,12 +19,15 @@ namespace Sunshine.Controllers
         }
 
         // GET: News
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
+            if (page < 1)
+                return NotFound();
+
             ViewData["Menus"] = await _menusRepository.GetIncludedSubMenus();
 
-            IEnumerable<New> news = await _newsRepository.Get();
-            return View(news);
+            NewsIndexViewModel newsIndexViewModel = await _newsRepository.Get(page);
+            return View(newsIndexViewModel);
         }
 
         // GET: News/Details/5

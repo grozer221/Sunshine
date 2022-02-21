@@ -9,6 +9,11 @@ namespace Sunshine
 {
     public class AppDatabaseContext : DbContext
     {
+        public AppDatabaseContext() : base()
+        {
+            Database.Migrate();
+        }
+
         public AppDatabaseContext(DbContextOptions<AppDatabaseContext> options) : base(options)
         {
             Database.Migrate();
@@ -19,6 +24,14 @@ namespace Sunshine
         public DbSet<SubMenu> SubMenus { get; set; }
         public DbSet<New> News { get; set; }
         public DbSet<File> Files { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            if (!options.IsConfigured)
+            {
+                options.UseMySQL("server=localhost;database=sunshine;user=root;password=;port=3306;");
+            }
+        }
 
         public override int SaveChanges()
         {
@@ -48,7 +61,7 @@ namespace Sunshine
 
         public static string GetConnectionString()
         {
-            string connectionString = Environment.GetEnvironmentVariable("JAWSDB_URL");
+            string connectionString = Environment.GetEnvironmentVariable("JAWSDB_URL") ?? "mysql://root:@localhost:3306/sunshine";
             connectionString = connectionString.Split("//")[1];
             string user = connectionString.Split(':')[0];
             connectionString = connectionString.Replace(user, "").Substring(1);

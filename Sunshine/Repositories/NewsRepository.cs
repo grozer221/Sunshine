@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sunshine.Models;
+using Sunshine.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sunshine.Repositories
@@ -12,12 +15,19 @@ namespace Sunshine.Repositories
         {
             _ctx = ctx;
         }
-        public async Task<IEnumerable<New>> Get()
+        public async Task<NewsIndexViewModel> Get(int page = 1)
         {
-            return await _ctx.News.ToListAsync();
+            int take = 10;
+            int skip = (page - 1) * take;
+            return new NewsIndexViewModel
+            {
+                News = await _ctx.News.OrderByDescending(n => n.CreatedAt).Skip(skip).Take(take).ToListAsync(),
+                PagesCount = (int)Math.Ceiling((decimal)_ctx.News.Count() / take),
+                PageNumber = page,
+            };
         }
 
-        public async Task<New> GetById(int? id)
+        public async Task<New> GetById(int id)
         {
             return await _ctx.News.FindAsync(id);
         }

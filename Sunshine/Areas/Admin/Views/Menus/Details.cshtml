@@ -20,19 +20,27 @@
             @Html.DisplayNameFor(model => model.Menu.SubMenus)
         </dt>
         <dd class="col-sm-10">
-            <ul>
-                @{
-                    foreach (var subMenu in Model.SubMenus)
+            <table class="table sorting" id="subMenus">
+                <thead>
+                    <tr class="tableHeader">
+                        <th>Назва</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var subMenu in Model.SubMenus)
                     {
-                        <li>
-                            <span>@subMenu.Name</span>
-                            <a asp-controller="SubMenus" asp-action="Details" asp-route-id="@subMenu.Id">Переглянути</a>
-                            <a asp-controller="SubMenus" asp-action="Edit" asp-route-id="@subMenu.Id">Редарувати</a>
-                            <a asp-controller="SubMenus" asp-action="Delete" asp-route-id="@subMenu.Id">Видалити</a>
-                        </li>
+                        <tr id="id_@subMenu.Id" class="@subMenu.Id">
+                            <td>@subMenu.Name</td>
+                            <td>
+                                <a asp-controller="SubMenus" asp-action="Details" asp-route-id="@subMenu.Id" class="btn btn-outline-primary">Переглянути</a>
+                                <a asp-controller="SubMenus" asp-action="Edit" asp-route-id="@subMenu.Id" class="btn btn-dark">Редарувати</a>
+                                <a asp-controller="SubMenus" asp-action="Delete" asp-route-id="@subMenu.Id" class="btn btn-danger">Видалити</a>
+                            </td>
+                        </tr>
                     }
-                }
-            </ul>
+                </tbody>
+            </table>
 
         </dd>
     </dl>
@@ -41,3 +49,17 @@
     <a asp-action="Index" class="btn btn-outline-primary">Повернутися назад</a>
     <a asp-action="Edit" asp-route-id="@Model.Menu.Id" class="btn btn-dark">Редагувати</a>
 </div>
+
+@section Scripts{
+    <script>
+        $("table#subMenus tbody").sortable({
+            items: "tr:not(.tableHeader)",
+            placeholder: "ui-state-hightlight",
+            update: function () {
+                let ids = $("table#subMenus tbody").sortable("serialize");
+                let url = "/admin/submenus/reorder";
+                $.post(url, ids, function () { });
+            }
+        })
+    </script>
+}

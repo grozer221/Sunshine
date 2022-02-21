@@ -60,8 +60,8 @@ namespace Sunshine
 
             app.UseRouting();
 
-            app.UseAuthentication();    // аутентификация
-            app.UseAuthorization();     // авторизация  
+            app.UseAuthentication();    
+            app.UseAuthorization();    
 
             app.UseEndpoints(endpoints =>
             {

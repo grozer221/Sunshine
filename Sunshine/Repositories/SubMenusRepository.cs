@@ -69,7 +69,7 @@ namespace Sunshine.Repositories
             var menu = await _ctx.Menus.Include(m => m.SubMenus).FirstOrDefaultAsync(m => m.Id == id);
             if (menu == null)
                 throw new Exception("");
-            return menu.SubMenus;
+            return menu.SubMenus.OrderBy(s => s.Sorting);
         }
     }
 }

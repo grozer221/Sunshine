@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Sunshine.Areas.Admin.ViewModels;
 using Sunshine.Models;
+using Sunshine.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +17,16 @@ namespace Sunshine.Repositories
             _ctx = ctx;
         }
 
-        public async Task<IEnumerable<File>> Get()
+        public async Task<FilesIndexViewModel> Get(int page = 1)
         {
-            return await _ctx.Files.OrderByDescending(m => m.CreatedAt).ToListAsync();
+            int take = 10;
+            int skip = (page - 1) * take;
+            return new FilesIndexViewModel
+            {
+                Files = await _ctx.Files.OrderByDescending(n => n.CreatedAt).Skip(skip).Take(take).ToListAsync(),
+                PagesCount = (int)Math.Ceiling((decimal)_ctx.News.Count() / take),
+                PageNumber = page,
+            };
         }
 
         public async Task<File> GetById(int id)

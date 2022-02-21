@@ -1,4 +1,4 @@
-﻿@model Sunshine.Areas.Admin.ViewModels.FilesIndexViewModel;
+﻿@model FilesIndexViewModel
 
 @{
     ViewData["Title"] = "Файли (Адмін)";
@@ -63,3 +63,8 @@
         }
     </tbody>
 </table>
+
+
+<div class="d-flex w-100 justify-content-center">
+    <pagination page-count="@Model.PagesCount" page-target="/admin/files" page-number="@Model.PageNumber" page-size="10" page-range="10"></pagination>
+</div>

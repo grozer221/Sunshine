@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Sunshine.Models;
 using Sunshine.Repositories;
+using Sunshine.ViewModels;
 
 namespace Sunshine.Areas.Admin.Controllers
 {
@@ -23,19 +24,16 @@ namespace Sunshine.Areas.Admin.Controllers
         }
 
         // GET: Admin/News
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            var news = await _newsRep.Get();
-            return View(news);
+            NewsIndexViewModel newsIndexViewModel =  await _newsRep.Get(page);
+            return View(newsIndexViewModel);
         }
 
         // GET: Admin/News/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-                return NotFound();
-
-            var neww = await _newsRep.GetById(id);
+            New neww = await _newsRep.GetById(id);
             if (neww == null)
                 return NotFound();
 
@@ -74,11 +72,8 @@ namespace Sunshine.Areas.Admin.Controllers
         }
 
         // GET: Admin/News/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-                return NotFound();
-
             var neww = await _newsRep.GetById(id);
             if (neww == null)
                 return NotFound();
@@ -123,11 +118,8 @@ namespace Sunshine.Areas.Admin.Controllers
         }
 
         // GET: Admin/News/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-                return NotFound();
-
             var neww = await _newsRep.GetById(id);
             if (neww == null)
                 return NotFound();

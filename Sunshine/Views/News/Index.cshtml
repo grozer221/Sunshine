@@ -1,11 +1,11 @@
-﻿@model IEnumerable<New>
+﻿@model NewsIndexViewModel
 
 @{
     ViewData["Title"] = "Новини";
 }
 
 <div class="news">
-    @foreach (var neww in Model)
+    @foreach (var neww in Model.News)
     {
         <div class="new">
             <h3>@neww.Title</h3>
@@ -23,5 +23,9 @@
             </div>
         </div>
     }
+</div>
+
+<div class="d-flex w-100 justify-content-center">
+    <pagination page-count="@Model.PagesCount" page-target="/" page-number="@Model.PageNumber" page-size="10" page-range="10"></pagination>
 </div>
 

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Sunshine.Models.New>
+﻿@model NewsIndexViewModel
 
 @{
     ViewData["Title"] = "Новини (Адмін)";
@@ -14,16 +14,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => ((List<New>)model.News)[0].Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Image)
+                @Html.DisplayNameFor(model => ((List<New>)model.News)[0].Image)
             </th>
             <th>Дії</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.News)
         {
             <tr>
                 <td>
@@ -43,9 +43,5 @@
 </table>
 
 <div class="d-flex w-100 justify-content-center">
-    <Pagination page-count="@ViewBag.TotalPages"
-                page-target="/Admin/Products"
-                page-number="@ViewBag.Page"
-                page-range="@ViewBag.PageRange">
-    </Pagination>
+    <pagination page-count="@Model.PagesCount" page-target="/admin" page-number="@Model.PageNumber" page-size="10" page-range="10"></pagination>
 </div>

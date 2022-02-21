@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Sunshine.Areas.Admin.ViewModels
+namespace Sunshine.ViewModels
 {
-    public class FilesIndexViewModel
+    public class NewsIndexViewModel
     {
-        public IEnumerable<File> Files { get; set; }
+        public IEnumerable<New> News { get; set; }
         public int PagesCount { get; set; }
         public int PageNumber { get; set; }
-        public string WebRootPath { get; set; }
     }
 }

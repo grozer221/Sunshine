@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Sunshine.Areas.Admin.ViewModels;
 using Sunshine.Models;
 using Sunshine.Repositories;
+using Sunshine.ViewModels;
 
 namespace Sunshine.Areas.Admin.Controllers
 {
@@ -24,14 +25,11 @@ namespace Sunshine.Areas.Admin.Controllers
         }
 
         // GET: Admin/Files
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
+            FilesIndexViewModel filesIndexViewModel = await _filesRepository.Get(page);
             string protocol = HttpContext.Request.IsHttps ? "https" : "http";
-            FilesIndexViewModel filesIndexViewModel = new FilesIndexViewModel
-            {
-                Files = await _filesRepository.Get(),
-                WebRootPath = $"{protocol}://{HttpContext.Request.Host.Value}"
-            };
+            filesIndexViewModel.WebRootPath = $"{protocol}://{HttpContext.Request.Host.Value}";
             return View(filesIndexViewModel);
         }
 

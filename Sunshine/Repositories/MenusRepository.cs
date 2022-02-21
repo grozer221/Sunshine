@@ -22,7 +22,10 @@ namespace Sunshine.Repositories
         
         public async Task<IEnumerable<Menu>> GetIncludedSubMenus()
         {
-            return await _ctx.Menus.Include(m => m.SubMenus).OrderBy(m => m.Sorting).ToListAsync();
+            IEnumerable<Menu> menus = await _ctx.Menus.Include(m => m.SubMenus).OrderBy(m => m.Sorting).ToListAsync();
+            foreach (var menu in menus)
+                menu.SubMenus = menu.SubMenus.OrderBy(s => s.Sorting);
+            return menus;
         }
         
         public async Task<Menu> GetById(int id)
