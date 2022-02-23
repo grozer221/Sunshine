@@ -37,11 +37,12 @@
                         string extension = System.IO.Path.GetExtension(item.Name);
                         if (extensions.Any(x => extension.EndsWith(x)))
                         {
-                            <img src="~/media/files/@item.Name" width="100" />
+                            <img src="@item.Url" width="100" />
+                            @*<img src="@item.Url" width="100" />*@
                         }
                         else
                         {
-                            <img src="~/media/images/file.png" width="100" />
+                            <img src="/media/images/file.png" width="100" />
                         }
                     }
                 </td>
@@ -57,7 +58,7 @@
                 <td>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary">Детально</a>
                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Видалити</a>
-                    <button class="btn btn-dark" onclick="copytext('@($"{Model.WebRootPath}/media/files/{item.Name}")')">Копіювати</button>
+                    <button class="btn btn-dark" onclick="copytext('@($"{item.Url}")')">Копіювати</button>
                 </td>
             </tr>
         }

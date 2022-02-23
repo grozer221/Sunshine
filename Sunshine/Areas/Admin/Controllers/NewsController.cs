@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Sunshine.Models;
 using Sunshine.Repositories;
+using Sunshine.Services;
 using Sunshine.ViewModels;
 
 namespace Sunshine.Areas.Admin.Controllers
@@ -16,11 +17,13 @@ namespace Sunshine.Areas.Admin.Controllers
     {
         private readonly NewsRepository _newsRep;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly CloudinaryService _cloudinaryService;
 
-        public NewsController(NewsRepository newsRep, IWebHostEnvironment webHostEnvironment)
+        public NewsController(NewsRepository newsRep, IWebHostEnvironment webHostEnvironment, CloudinaryService cloudinaryService)
         {
             _newsRep = newsRep;
             _webHostEnvironment = webHostEnvironment;
+            _cloudinaryService = cloudinaryService;
         }
 
         // GET: Admin/News
@@ -56,15 +59,14 @@ namespace Sunshine.Areas.Admin.Controllers
                 string imageName = "noimage.jpg";
                 if (neww.ImageUpload != null)
                 {
-                    string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/news");
+                    //string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/news");
                     imageName = Guid.NewGuid().ToString() + "_" + neww.ImageUpload.FileName;
-                    string filePath = Path.Combine(uploadsDir, imageName);
-                    FileStream fs = new FileStream(filePath, FileMode.Create);
-                    await neww.ImageUpload.CopyToAsync(fs);
-                    fs.Close();
+                    //string filePath = Path.Combine(uploadsDir, imageName);
+                    //FileStream fs = new FileStream(filePath, FileMode.Create);
+                    //await neww.ImageUpload.CopyToAsync(fs);
+                    //fs.Close();
+                    neww.Image = await _cloudinaryService.UplaodImageAsync(neww.ImageUpload, imageName);
                 }
-
-                neww.Image = imageName;
                 await _newsRep.Create(neww);
                 return RedirectToAction(nameof(Index));
             }
@@ -94,22 +96,22 @@ namespace Sunshine.Areas.Admin.Controllers
             {
                 if (neww.ImageUpload != null)
                 {
-                    string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/news");
-                    if (neww.Image != null && !string.Equals(neww.Image, "noimage.jpg"))
-                    {
-                        string oldImagePath = Path.Combine(uploadsDir, neww.Image);
-                        if (System.IO.File.Exists(oldImagePath))
-                        {
-                            System.IO.File.Delete(oldImagePath);
-                        }
-                    }
+                    //string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/news");
+                    //if (neww.Image != null && !string.Equals(neww.Image, "noimage.jpg"))
+                    //{
+                    //    string oldImagePath = Path.Combine(uploadsDir, neww.Image);
+                    //    if (System.IO.File.Exists(oldImagePath))
+                    //    {
+                    //        System.IO.File.Delete(oldImagePath);
+                    //    }
+                    //}
 
                     string imageName = Guid.NewGuid().ToString() + "_" + neww.ImageUpload.FileName;
-                    string filePath = Path.Combine(uploadsDir, imageName);
-                    FileStream fs = new FileStream(filePath, FileMode.Create);
-                    await neww.ImageUpload.CopyToAsync(fs);
-                    fs.Close();
-                    neww.Image = imageName;
+                    //string filePath = Path.Combine(uploadsDir, imageName);
+                    //FileStream fs = new FileStream(filePath, FileMode.Create);
+                    //await neww.ImageUpload.CopyToAsync(fs);
+                    //fs.Close();
+                    neww.Image = await _cloudinaryService.UplaodImageAsync(neww.ImageUpload, imageName);
                 }
                 await _newsRep.Update(neww);
                 return RedirectToAction(nameof(Index));
@@ -133,15 +135,15 @@ namespace Sunshine.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var neww = await _newsRep.GetById(id);
-            if (neww.Image != null && !string.Equals(neww.Image, "noimage.jpg"))
-            {
-                string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/news");
-                string oldImagePath = Path.Combine(uploadsDir, neww.Image);
-                if (System.IO.File.Exists(oldImagePath))
-                {
-                    System.IO.File.Delete(oldImagePath);
-                }
-            }
+            //if (neww.Image != null && !string.Equals(neww.Image, "noimage.jpg"))
+            //{
+            //    string uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/news");
+            //    string oldImagePath = Path.Combine(uploadsDir, neww.Image);
+            //    if (System.IO.File.Exists(oldImagePath))
+            //    {
+            //        System.IO.File.Delete(oldImagePath);
+            //    }
+            //}
             await _newsRep.Delete(id);
             return RedirectToAction("Index");
         }

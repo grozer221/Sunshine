@@ -12,6 +12,24 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Upload)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                string[] extensions = { "jpg", "png" };
+                string extension = System.IO.Path.GetExtension(Model.Name);
+                if (extensions.Any(x => extension.EndsWith(x)))
+                {
+                    <img src="@Model.Url" width="100" />
+                    @*<img src="/media/files/@Model.File.Name" width="100" />*@
+                }
+                else
+                {
+                    <img src="/media/images/file.png" width="100" />
+                }
+            }
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd class="col-sm-10">

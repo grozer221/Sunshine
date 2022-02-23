@@ -1,4 +1,4 @@
-﻿@model FilesDetailsViewModel
+﻿@model File
 
 @{
     ViewData["Title"] = "Детально про файл (Адмін)";
@@ -9,43 +9,44 @@
 <div>
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.File.Upload)
+            @Html.DisplayNameFor(model => model.Upload)
         </dt>
         <dd class="col-sm-10">
             @{
                 string[] extensions = { "jpg", "png" };
-                string extension = System.IO.Path.GetExtension(Model.File.Name);
+                string extension = System.IO.Path.GetExtension(Model.Name);
                 if (extensions.Any(x => extension.EndsWith(x)))
                 {
-                    <img src="~/media/files/@Model.File.Name" width="100" />
+                    <img src="@Model.Url" width="100" />
+                    @*<img src="/media/files/@Model.File.Name" width="100" />*@
                 }
                 else
                 {
-                    <img src="~/media/images/file.png" width="100" />
+                    <img src="/media/images/file.png" width="100" />
                 }
             }
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.File.Name)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.File.Name)
+            @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.File.CreatedAt)
+            @Html.DisplayNameFor(model => model.CreatedAt)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.File.CreatedAt)
+            @Html.DisplayFor(model => model.CreatedAt)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.File.UpdatedAt)
+            @Html.DisplayNameFor(model => model.UpdatedAt)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.File.UpdatedAt)
+            @Html.DisplayFor(model => model.UpdatedAt)
         </dd>
     </dl>
 </div>
 <div>
-    <button class="btn btn-dark" onclick="copytext('@($"{Model.WebRootPath}/media/files/{Model.File.Name}")')">Копіювати</button>
+    <button class="btn btn-dark" onclick="copytext('@($"{Model.Url}")')">Копіювати</button>
     <a asp-action="Index" class="btn btn-outline-primary">Повернутися назад</a>
 </div>

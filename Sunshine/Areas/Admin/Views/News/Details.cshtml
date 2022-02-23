@@ -30,7 +30,7 @@
             @Html.DisplayNameFor(model => model.Image)
         </dt>
         <dd class="col-sm-10">
-            <img src="~/media/news/@Model.Image" width="200" />
+            <img src="@(string.IsNullOrEmpty(Model.Image) ?  "/media/images/noimage.jpg" : Model.Image)" width="200" />
         </dd>
     </dl>
 </div>

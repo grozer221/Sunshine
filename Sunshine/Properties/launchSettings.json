@@ -17,6 +17,7 @@
         "From": "grozermailpassreset@gmail.com",
         "JAWSDB_URL": "mysql://root:@localhost:3306/sunshine",
         "Password": "grozermailpassreset123",
+        "CLOUDINARY_URL": "cloudinary://751219199993312:GAE37qDF-B3VC8_SiOym58-c1mI@hfiuvowf4",
         "Port": "465",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

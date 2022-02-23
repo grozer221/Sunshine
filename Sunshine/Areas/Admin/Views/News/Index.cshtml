@@ -30,7 +30,7 @@
                     @item.Title
                 </td>
                 <td>
-                    <img src="~/media/news/@item.Image" width="100" />
+                    <img src="@(string.IsNullOrEmpty(item.Image) ?  "/media/images/noimage.jpg" : item.Image)" width="100" />
                 </td>
                 <td>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary">Детально</a>

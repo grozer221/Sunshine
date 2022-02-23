@@ -10,6 +10,12 @@ namespace Sunshine.Models
         [Display(Name = "Ім'я")]
         [Required(ErrorMessage = "Введіть ім'я")]
         public string Name { get; set; }
+        
+        [Display(Name = "Повне ім'я")]
+        public string FullName { get; set; }
+        
+        [Display(Name = "Шлях")]
+        public string Url { get; set; }
 
         [NotMapped]
         [Display(Name = "Файл")]

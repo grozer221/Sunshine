@@ -11,6 +11,5 @@ namespace Sunshine.Areas.Admin.ViewModels
         public IEnumerable<File> Files { get; set; }
         public int PagesCount { get; set; }
         public int PageNumber { get; set; }
-        public string WebRootPath { get; set; }
     }
 }

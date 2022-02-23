@@ -33,6 +33,7 @@ namespace Sunshine
 
             services.AddSingleton<MailService>();
             services.AddSingleton<AuthService>();
+            services.AddSingleton<CloudinaryService>();
 
             services.AddControllersWithViews();
 
